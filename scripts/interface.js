@@ -8,13 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 })
 
-function handleClick (event) {
+function handleClick(event) {
     let square = event.target
     let position = square.id
     if (handleMove(position)) {
 
         setTimeout(() => {
-            
+
             if (playerTime == 1) {
                 playerTime = "o X ganhou"
                 Phase = playerTime
@@ -25,35 +25,34 @@ function handleClick (event) {
             alert("O jogo acabou - " + Phase)
             addButton()
         }, 10)
-        
+
     }
     updateSquare(position)
 }
 
-function updateSquare (position) {
+function updateSquare(position) {
     let square = document.getElementById(position.toString())
     let symbol = board[position]
     square.innerHTML = `<div class="${symbol}"></div>`
 }
 
-function addButton () {
+function addButton() {
     button.classList.remove("none")
 }
 
 
-button.addEventListener ("click", newGame)
+button.addEventListener("click", newGame)
 
-function newGame () {
+function newGame() {
     let squares = document.querySelectorAll(".square")
-    
+
+    board = ["", "", "", "", "", "", "", "", ""]
+    gameOver = false
+    playerTime = 0
+
     squares.forEach((square) => {
-        let position = square.id
-        board = ["", "", "", "", "", "", "", "", ""]
-        let symbol = board[position]
-        
-        
-        if (symbol != "") {
-            square.innerHTML = `<div class="${symbol}"></div>`
-        }   
+        square.innerHTML = ""
     })
+
+    button.classList.add("none")
 }
